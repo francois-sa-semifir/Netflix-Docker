@@ -1,27 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-inferrable-types */
+import { Component, inject, OnInit } from '@angular/core';
+
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { SerieService } from '../services/serie.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-detail-serie',
+  standalone: true,
+  imports: [RouterLink],
   templateUrl: './detail-serie.component.html',
   styleUrls: ['./detail-serie.component.css']
 })
 export class DetailSerieComponent implements OnInit {
-  
-  serie;
-  id;
+  private serieService = inject(SerieService);
+  private route = inject(ActivatedRoute);
 
-  constructor(private serieService : SerieService, private route : ActivatedRoute) {
-    this.route.params.subscribe(params => this.id = params);
-
-  }
+  serie: any = {};
+  id: number = 0;
 
   ngOnInit() {
-    this.serie = this.serieService.getSerieById(this.id.id).subscribe
-      (data=>{
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+      this.serieService.getSerieById(this.id).subscribe(data => {
         this.serie = data;
-      })
+      });
+    });
   }
-
 }
