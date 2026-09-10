@@ -1,15 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-inferrable-types */
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-serie',
-  standalone: true,
   imports: [RouterLink],
   templateUrl: './serie.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrls: ['./serie.component.css']
+  styleUrl: './serie.component.css'
 })
 export class SerieComponent {
-  @Input() serie: any;
+  serie = input<any>();
 }

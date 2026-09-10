@@ -1,7 +1,7 @@
 #
 # https://gitlab.com/gitlab-org/gitlab-foss/tree/master/lib/gitlab/ci/templates/Nodejs.gitlab-ci.yml
 #
-image: node:latest
+image: node:22-alpine
 
 # Cache modules in between jobs
 cache:
@@ -10,25 +10,23 @@ cache:
     - node_modules/
 
 before_script:
-    - npm install
+    - npm ci
 
 build_stage :
-    image: tiangolo/node-frontend:10
     stage: build
     script:
-        - npm install
-        - npm run ng build --prod
+        - npm run build
     when: on_success
 
 e2e_tests :
-    image : node:latest
+    image : node:22-alpine
     stage: test
     script:
         # - npm run ng e2e
         - echo "No e2e testing yet"
 
 unit_test:
-    image: node:latest
+    image: node:22-alpine
     stage : test
     script :
         # - npm run ng test
@@ -36,8 +34,5 @@ unit_test:
 
 deployment_stage:
     stage: deploy
-    # image: nginx
     script:
-        # - mv ./dist/netflix/ /usr/share/nginx/html/
-        # - service nginx start
         - echo "Configure deployement here"

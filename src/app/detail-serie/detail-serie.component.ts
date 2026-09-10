@@ -1,30 +1,20 @@
-/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-inferrable-types */
-import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
-
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { SerieService } from '../services/serie.service';
 
 @Component({
   selector: 'app-detail-serie',
-  standalone: true,
   imports: [RouterLink],
   templateUrl: './detail-serie.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrls: ['./detail-serie.component.css']
+  styleUrl: './detail-serie.component.css'
 })
-export class DetailSerieComponent implements OnInit {
+export class DetailSerieComponent {
   private serieService = inject(SerieService);
   private route = inject(ActivatedRoute);
 
-  serie: any = {};
-  id: number = 0;
+  // Récupération de l'ID depuis le snapshot de la route
+  id = Number(this.route.snapshot.params['id']);
 
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.id = params['id'];
-      this.serieService.getSerieById(this.id).subscribe(data => {
-        this.serie = data;
-      });
-    });
-  }
+  // resource() charge automatiquement la série par son ID
+  serieResource = this.serieService.getSerieById(this.id);
 }

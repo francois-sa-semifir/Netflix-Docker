@@ -1,22 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-inferrable-types */
-import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
-
+import { Component, inject } from '@angular/core';
 import { SerieService } from '../services/serie.service';
 import { SerieComponent } from '../serie/serie.component';
 
 @Component({
   selector: 'app-list-serie',
-  standalone: true,
   imports: [SerieComponent],
   templateUrl: './list-serie.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrls: ['./list-serie.component.css']
+  styleUrl: './list-serie.component.css'
 })
-export class ListSerieComponent implements OnInit {
+export class ListSerieComponent {
   private serieService = inject(SerieService);
-  series: any[] = [];
 
-  ngOnInit() {
-    this.serieService.getSeries().subscribe(data => this.series = data['results']);
-  }
+  // resource() interroge l'API automatiquement au chargement du composant
+  seriesResource = this.serieService.getSeries();
 }

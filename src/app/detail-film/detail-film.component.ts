@@ -1,30 +1,20 @@
-/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-inferrable-types */
-import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
-
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FilmService } from '../services/film.service';
 
 @Component({
   selector: 'app-detail-film',
-  standalone: true,
   imports: [RouterLink],
   templateUrl: './detail-film.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrls: ['./detail-film.component.css']
+  styleUrl: './detail-film.component.css'
 })
-export class DetailFilmComponent implements OnInit {
+export class DetailFilmComponent {
   private filmService = inject(FilmService);
   private route = inject(ActivatedRoute);
 
-  film: any = {};
-  id: number = 0;
+  // Récupération de l'ID depuis le snapshot de la route
+  id = Number(this.route.snapshot.params['id']);
 
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.id = params['id'];
-      this.filmService.getFilmById(this.id).subscribe(data => {
-        this.film = data;
-      });
-    });
-  }
+  // resource() charge automatiquement le film par son ID
+  filmResource = this.filmService.getFilmById(this.id);
 }

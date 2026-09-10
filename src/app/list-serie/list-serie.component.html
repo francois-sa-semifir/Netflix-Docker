@@ -1,9 +1,9 @@
-@if (series) {
-  <div class="container">
+<div class="container">
+  @if (seriesResource.value()) {
     <div class="row row-cols-4">
-      @for (serie of series; track serie) {
+      @for (serie of seriesResource.value(); track serie.id) {
         <app-serie [serie]="serie"></app-serie>
       }
     </div>
-  </div>
-}
+  }
+</div>

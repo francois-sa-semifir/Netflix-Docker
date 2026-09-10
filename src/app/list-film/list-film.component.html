@@ -1,9 +1,9 @@
-@if (films) {
-  <div class="container">
+<div class="container">
+  @if (filmsResource.value()) {
     <div class="row row-cols-4">
-      @for (film of films; track film) {
+      @for (film of filmsResource.value(); track film.id) {
         <app-film class="col" [film]="film"></app-film>
       }
     </div>
-  </div>
-}
+  }
+</div>
