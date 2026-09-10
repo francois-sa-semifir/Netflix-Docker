@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-inferrable-types */
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { SerieService } from '../services/serie.service';
 import { SerieComponent } from '../serie/serie.component';
@@ -9,6 +9,7 @@ import { SerieComponent } from '../serie/serie.component';
   standalone: true,
   imports: [SerieComponent],
   templateUrl: './list-serie.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./list-serie.component.css']
 })
 export class ListSerieComponent implements OnInit {

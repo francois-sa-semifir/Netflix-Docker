@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-inferrable-types */
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { SerieService } from '../services/serie.service';
@@ -9,6 +9,7 @@ import { SerieService } from '../services/serie.service';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './detail-serie.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./detail-serie.component.css']
 })
 export class DetailSerieComponent implements OnInit {

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-inferrable-types */
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FilmService } from '../services/film.service';
@@ -9,6 +9,7 @@ import { FilmService } from '../services/film.service';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './detail-film.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./detail-film.component.css']
 })
 export class DetailFilmComponent implements OnInit {
