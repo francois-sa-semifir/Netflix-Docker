@@ -1,5 +1,9 @@
-<div class="container" *ngIf="series">
-    <div class="row row-cols-4">  
-            <app-serie *ngFor="let serie of series" [serie]="serie"></app-serie>
+@if (series) {
+  <div class="container">
+    <div class="row row-cols-4">
+      @for (serie of series; track serie) {
+        <app-serie [serie]="serie"></app-serie>
+      }
     </div>
-</div>
+  </div>
+}
